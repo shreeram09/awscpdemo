@@ -1,7 +1,11 @@
 package com.shreeram.awscpdemo;
 
+import java.net.InetAddress;
+import java.net.UnknownHostException;
+
 import com.blade.mvc.annotation.GetRoute;
 import com.blade.mvc.annotation.Path;
+import com.blade.mvc.http.Request;
 import com.blade.mvc.ui.ModelAndView;
 import com.blade.mvc.annotation.JSON;
 import com.blade.mvc.ui.RestResponse;
@@ -18,7 +22,16 @@ public class AppController {
     @GetRoute("/hi")
     @JSON
     public String hi(Request req){
-        
-        return req.remoteAddress();
+        String server = "";
+        String client = req.host()+"/"+req.remoteAddress();
+        InetAddress inet;
+        try{
+        inet = InetAddress.getLocalHost();
+        server = inet.toString();
+        }catch(UnknownHostException e){
+
+        }
+
+        return "me:"+server+", you:"+client;
     }
 }
