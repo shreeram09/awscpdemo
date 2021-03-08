@@ -9,10 +9,14 @@ phases:
       - ./gradlew clean build
   post_build:
     commands:
-      - echo "Build completed"
+      - mkdir deploy
+      - cp -rf build/libs/awscpdemo-all.jar deploy/
+      - cp appspec.yml deploy/
+      - cp -rf scripts/*.sh deploy/
 artifacts:
   files:
-    - build/libs/awscpdemo-all.jar
-    - scripts/*.sh
-    - appspec.yml
+    - deploy/*
+   # - build/libs/awscpdemo-all.jar
+   # - scripts/*.sh
+   # - appspec.yml
   discard-paths: yes
