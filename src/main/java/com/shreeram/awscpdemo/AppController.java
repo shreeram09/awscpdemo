@@ -9,6 +9,7 @@ import com.blade.mvc.http.Request;
 import com.blade.mvc.ui.ModelAndView;
 import com.blade.mvc.annotation.JSON;
 import com.blade.mvc.ui.RestResponse;
+import java.time.LocalDateTime;
 
 @Path("/home")
 public class AppController {
@@ -33,5 +34,11 @@ public class AppController {
         }
 
         return "me:"+server+", you:"+client;
+    }
+    
+      @GetRoute("/datetime")
+    @JSON
+    public String hi(){
+        return "current time: "+LocalDateTime.now().toString();
     }
 }
